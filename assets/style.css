@@ -8,6 +8,7 @@ body {
   background: linear-gradient(to right, #333333, #8739c0);
   width: 100vw;
   height: 100vh;
+  user-select: none;
 }
 
 .container {
@@ -59,35 +60,37 @@ body {
     }
   }
 
-  &.x .item:hover::before,
-  &.x .item:hover::after,
+  &.x .item:not(.x, .o):hover::before,
+  &.x .item:not(.x, .o):hover::after,
   .item.x::after,
   .item.x::before {
       content: '';
-      width: calc(100px * 0.08);
+      width: calc(100px * 0.1);
       height: 90px;
       background-color: white;
       color: black;
       position: absolute;
     }
 
-    &.x .item:hover::before,
+    &.x .item:not(.x, .o):hover::before,
     .item.x::before {
       transform: rotate(45deg);
     }
 
-    &.x .item:hover::after,
+    &.x .item:not(.x, .o):hover::after,
     .item.x::after {
       transform: rotate(-45deg);
     }
 
-    &.x .item:hover::before,
-    &.x .item:hover::after {
-      opacity: 0.5;
+    &.x .item:not(.x, .o):hover::before,
+    &.x .item:not(.x, .o):hover::after,
+    &.o .item:not(.x, .o):hover::after,
+    &.o .item:not(.x, .o):hover::before {
+      opacity: 0.2;
     }
 
-    &.o .item:hover::after,
-    &.o .item:hover::before,
+    &.o .item:not(.x, .o):hover::after,
+    &.o .item:not(.x, .o):hover::before,
     .item.o::after,
     .item.o::before {
       content: '';
@@ -97,11 +100,6 @@ body {
       border-radius: 50%;
       position: absolute;
     }
-
-    &.o .item:hover::after,
-    &.o .item:hover::before {
-      opacity: 0.1;
-    }
 }
 
 
@@ -109,5 +107,40 @@ body {
 
 
 .winning-message {
-  display: none;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0,0,0,0.7);
+  font-size: 5rem;
+  color: white;
+
+  button {
+    font-size: 2rem;
+    background-color: #8739c0;
+    padding: 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 16px 0;
+    color: white;
+    margin-top: 32px;
+    box-shadow: 4px 4px 10px rgba(0,0,0,0.85);
+
+    &:hover {
+      background-color: #6e2f9b;
+      transition: background-color 0.3s;
+    }
+
+    &:active {
+      background-color: #59267d;
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 10px rgba(0,0,0,0.85);
+      transition: background-color 0.3s, transform 0.15s;
+    }
+  }
 }
