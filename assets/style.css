@@ -106,7 +106,7 @@ body {
 
 
 
-.winning-message {
+.winning {
   display: none;
   flex-direction: column;
   position: fixed;
@@ -142,5 +142,10 @@ body {
       box-shadow: 1px 1px 10px rgba(0,0,0,0.85);
       transition: background-color 0.3s, transform 0.15s;
     }
+  }
+
+  &.show-message {
+    display: flex;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   }
 }
