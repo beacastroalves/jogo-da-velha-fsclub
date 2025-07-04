@@ -50,6 +50,12 @@ const checkForWin = (currentPlayer) => {
   });
 }
 
+const checkForDraw = () => {
+  return [...itemRefs].every(item => {
+    return item.classList.contains('x') || item.classList.contains('o');
+  })
+}
+
 const placeMark = (item, classToAdd) => {
   item.classList.add(classToAdd);
 }
@@ -81,12 +87,17 @@ const handleClick = (e) => {
   // Verificar a cada clique se houve vitória
   const isWin = checkForWin(classToAdd);
 
+  // Verificar a cada clique se houve empate
+  const isDraw = checkForDraw();
+
   if (isWin) {
     endGame(false);
+  } else if (isDraw) {
+    endGame(true);
+  } else {
+    // Mudar o jogador de X para O e virse-versa
+    swapTurns();
   }
-
-  // Verificar a cada clique se houve empate
-  swapTurns();
 }
 
 startGame();
